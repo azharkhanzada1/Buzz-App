@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from .models import *
+from .models import Post, Comment, Like, View
 
-class PostSerializer(serializers.Serializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Post
-        fields = ['id','title', 'content', 'author', 'created_at', 'updated_at']
+        model = Post
+        fields = ['id', 'title', 'content', 'author', 'created_at', 'updated_at']
 
-class CommentSerializer(serializers.Serializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Comment
-        fields = ['id','post', 'content', 'author', 'created_at']
+        model = Comment
+        fields = ['id', 'post', 'content', 'author', 'created_at']
 
-class LikeSerializer(serializers.Serializer):
+class LikeSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Like
-        fields = ['id','post', 'user', 'created_at']
+        model = Like
+        fields = ['id', 'post', 'user', 'created_at']
 
-class ViewSerializer(serializers.Serializer):
+class ViewSerializer(serializers.ModelSerializer):
     class Meta:
-        models = View
+        model = View
         fields = ['id', 'post', 'user', 'created_at']
