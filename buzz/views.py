@@ -4,6 +4,8 @@ from rest_framework.authentication import BaseAuthentication
 from .serializers import PostSerializer, CommentSerializer, LikeSerializer, ViewSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+
+
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
