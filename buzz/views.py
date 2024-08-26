@@ -1,17 +1,29 @@
 from rest_framework import viewsets
 from .models import Post, Comment, Like, View
 from rest_framework.authentication import BaseAuthentication
+
+from .pagination import BuzzLimitOffsetPagination
+# from .pagination import MyLimitOffsetPagination
+# from .pagination import CustomPageNumberPagination
 from .serializers import PostSerializer, CommentSerializer, LikeSerializer, ViewSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.filters import SearchFilter
+
+# from .pagination import BuzzCursorPagination
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    # authentication_classes = [JWTAuthentication]
-    # authentication_classes = [BaseAuthentication]
+    # pagination_class = CustomPageNumberPagination
+    # pagination_class = BuzzCursorPagination
+    pagination_class = BuzzLimitOffsetPagination
     permission_classes = [IsAuthenticated]
+    filter_backends = [SearchFilter]
+    search_fields = ['title']
+
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()

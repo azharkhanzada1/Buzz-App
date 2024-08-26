@@ -1,7 +1,24 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.viewsets import ModelViewSet
+
+from .models import CustomUser
+# from .pagination import UserPagination
+from rest_framework.pagination import LimitOffsetPagination
+
 from .serializers import UserCreateSerializer
+from .pagination import UserLimitOffsetPagination
+# from .pagination import UserCursorPagination
+
+
+class UserViewSet(ModelViewSet):
+    queryset = CustomUser
+    serializer_class = UserCreateSerializer
+    # pagination_class = UserPagination
+    pagination_class = UserLimitOffsetPagination
+    # pagination_class = UserCursorPagination
+
 
 class RegisterUserView(generics.CreateAPIView):
     serializer_class = UserCreateSerializer
