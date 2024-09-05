@@ -2,12 +2,14 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from buzz.models import Post, Comment, View, Like
 from datetime import datetime
+from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 
+User = get_user_model()
 class PostModelTest(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username="testuser", password="testpassword")
+        self.user = User.objects.create_user(email="testuser", password="testpassword")
 
     def test_create_post(self):
         post = Post.objects.create(
@@ -52,7 +54,7 @@ class PostModelTest(TestCase):
 
 class CommentModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="testuser", password='testpassword')
+        self.user = User.objects.create_user(email="testuser", password='testpassword')
         self.post = Post.objects.create(
             title = "Test Post",
             content = "Test Content",
@@ -89,7 +91,7 @@ class CommentModelTest(TestCase):
             )
 class LikeModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="testuser", password="testpassword")
+        self.user = User.objects.create_user(email="testuser", password="testpassword")
         self.post = Post.objects.create(
             title= "Test Post",
             content =" Test Content",
@@ -111,7 +113,7 @@ class LikeModelTest(TestCase):
             post = self.post,
             user = self.user
         )
-        self.assertEqual(str(like), f"Like by {self.user.username} on {self.post.title}")
+        self.assertEqual(str(like), f"Like by {self.user.email} on {self.post.title}")
 
     def test_like_unique_constraint(self):
         Like.objects.create(
@@ -126,7 +128,7 @@ class LikeModelTest(TestCase):
 
 class ViewModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="username", password='testpassword')
+        self.user = User.objects.create_user(email="email", password='testpassword')
         self.post = Post.objects.create(
             title = "Test Post",
             content = "Test Content",
@@ -148,7 +150,7 @@ class ViewModelTest(TestCase):
             post = self.post,
             user = self.user
         )
-        self.assertEqual(str(view), f"View by {self.user.username} on {self.post.title}")
+        self.assertEqual(str(view), f"View by {self.user.email} on {self.post.title}")
 
     def test_view_unique_constraint(self):
         view = View.objects.create(
@@ -163,7 +165,7 @@ class ViewModelTest(TestCase):
 
     def test_multiple_views(self):
         # Test multiple views by different users on the same post
-        another_user = User.objects.create_user(username="anotheruser", password="anotherpassword")
+        another_user = User.objects.create_user(email="anotheruser", password="anotherpassword")
         view1 = View.objects.create(post=self.post, user=self.user)
         view2 = View.objects.create(post=self.post, user=another_user)
 

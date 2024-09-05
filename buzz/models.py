@@ -11,10 +11,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    # class Meta:
-    #     ordering = ["-created_at"]
-    #     verbose_name = "Post"
-    #     verbose_name_plural = "Posts"
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
@@ -33,7 +33,7 @@ class Like(models.Model):
         unique_together = ('post', 'user')
 
     def __str__(self):
-        return f"Like by {self.user.username} on {self.post.title}"
+        return f"Like by {self.user.email} on {self.post.title}"
 
 class View(models.Model):
     post = models.ForeignKey(Post, related_name='views', on_delete=models.CASCADE)
@@ -44,4 +44,4 @@ class View(models.Model):
         unique_together = ('post', 'user')
 
     def __str__(self):
-        return f"View by {self.user.username} on {self.post.title}"
+        return f"View by {self.user.email} on {self.post.title}"
