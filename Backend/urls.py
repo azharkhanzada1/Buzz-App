@@ -6,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('buzz.urls')),
     path('', include('user.urls')),
+    path('', include('notification.urls')),
 ]
