@@ -9,7 +9,17 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.cache import cache
+from rest_framework.permissions import IsAuthenticated
+from follow.models import Follow
 
+class FollowViewSet(viewsets.ModelViewSet):
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        followed_users = Follow.objects.filter(follower=user).values_list('following_id', flat=True)
+        return Post.objects.filter(author_id__in=followed_users)
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()

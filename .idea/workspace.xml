@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="326d607c-25b0-4b21-8990-cde57a629144" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/follow/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/follow/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buzz/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/buzz/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buzz/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/buzz/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buzz/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buzz/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +44,7 @@
   "keyToString": {
     "Python.views.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "test-cases",
+    "git-widget-placeholder": "Notifications",
     "last_opened_file_path": "/home/azhar/Backend/Backend",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
