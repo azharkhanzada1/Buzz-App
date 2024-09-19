@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_spectacular',
     'notification',
+    'channels',
     'follow',
     'buzz',
     'user',
@@ -59,7 +60,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Backend.wsgi.application'
+# WSGI_APPLICATION = 'Backend.wsgi.application'
+ASGI_APPLICATION = 'Backend.asgi.application'
 
 # Database settings
 DATABASES = {
@@ -155,3 +157,28 @@ CACHES = {
         "KEY_PREFIX":"example"
     }
 }
+
+# Add the following configuration to your settings file
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',  # Unauthenticated users کے لیے
+        'rest_framework.throttling.UserRateThrottle',  # Authenticated users کے لیے
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '10/minute',  # Unauthenticated users 10 requests فی منٹ
+        'user': '100/minute',  # Authenticated users 100 requests فی منٹ
+    }
+}
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
