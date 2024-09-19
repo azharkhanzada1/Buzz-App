@@ -49,10 +49,6 @@ class UserRegisterView(APIView):
         user = serializer.save()
         token = get_token_for_user(user)
         return Response({"token": token, 'msg': 'Registration Successfully'}, status=status.HTTP_201_CREATED)
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = CustomUser.objects.all()
-#     # serializer_class = UserCreateSerializer()
-#     pagination_class = LimitOffsetPagination
 
 
 class UserChangePasswordView(APIView):
@@ -106,3 +102,8 @@ class UserPasswordResetView(APIView):
             serializer.save(uid=uid, token=token)
             return Response({'msg': 'Password has been reset successfully.'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = CustomUser.objects.all()
+#     # serializer_class = UserCreateSerializer()
+#     pagination_class = LimitOffsetPagination
